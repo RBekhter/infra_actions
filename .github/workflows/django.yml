@@ -70,11 +70,11 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
-        key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBbOoTeFLlw54e/Heyf+q4JZqpRYVb1xk/RA6j6QBjci rbexter@bexterserver
+        key: ${{ secrets.SSH_KEY }}
         #passphrase: ${{ secrets.PASSPHRASE }} # Если ваш ssh-ключ защищён фразой-паролем
         script: |
           # Выполняет pull образа с DockerHub
-          sudo docker pull rbexter/new-im
+          sudo docker pull rbexter/new-im:v1
           #остановка всех контейнеров
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 rbexter/new-im
+          sudo docker run --rm -d -p 5000:5000 rbexter/new-im:v1
